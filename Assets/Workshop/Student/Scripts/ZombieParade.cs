@@ -57,6 +57,7 @@ namespace Solution
             while (isAlive)
             {
                 // 1. ดึงส่วนแรกของงูออกมา
+                
                 LinkedListNode<Gameobject> fistNode = Parade.First;
                 GameObject firstPart = fistNode.Value;
                 // 2. ดึงส่วนสุดท้ายของงูออกมา
@@ -68,9 +69,19 @@ namespace Solution
                 // ให้ไปอยู่ที่ตำแหน่งของส่วนหัวงู (ซึ่งเพิ่งเคลื่อนที่ไปเมื่อครู่)
                 int toX = 0;
                 int toY = 0;
-                moveDirection = RandomizeDirection();
+                
+                bool  IsCollision = true;
+                while (IsCollision == true)
+                {
+                    moveDirection = RandomizeDirection();
+                    toX = (int)(firstPart.transform.position.x + moveDirection.x);
+                    toY = (int)(firstPart.transform.position.y + moveDirection.y);
+                    IsCollision = IsCollision(toX, toY);
+                }
+
+              /*moveDirection = RandomizeDirection();
                 toX = (int)(firstPart.transform.position.x + moveDirection.x);
-                toY = (int)(firstPart.transform.position.y + moveDirection.y);
+                toY = (int)(firstPart.transform.position.y + moveDirection.y);*/
                     
                 //6. เคลื่อนที่
                 mapGenerator.mapdata[positionX, positionY] = null;
