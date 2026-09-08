@@ -53,15 +53,15 @@ namespace Solution
         IEnumerator MoveParade()
         {
             //0. สร้างหัวงู
-            Parade.AddFirst(this.gameobject);
+            Parade.AddFirst(this.gameObject);
             while (isAlive)
             {
                 // 1. ดึงส่วนแรกของงูออกมา
-                
-                LinkedListNode<Gameobject> fistNode = Parade.First;
+
+                LinkedListNode<GameObject> fistNode = Parade.First;
                 GameObject firstPart = fistNode.Value;
                 // 2. ดึงส่วนสุดท้ายของงูออกมา
-                LinkedListNode<Gameobject> listNode = Parade.Last;
+                LinkedListNode<GameObject> listNode = Parade.Last;
                 GameObject lastPart = listNode.Value;
                 // 3. ลบส่วนสุดท้ายออกจาก LinkedList
                 Parade.RemoveLast();
@@ -70,13 +70,13 @@ namespace Solution
                 int toX = 0;
                 int toY = 0;
                 
-                bool  IsCollision = true;
-                while (IsCollision == true)
+                bool collision = true;
+                while (collision == true)
                 {
                     moveDirection = RandomizeDirection();
                     toX = (int)(firstPart.transform.position.x + moveDirection.x);
                     toY = (int)(firstPart.transform.position.y + moveDirection.y);
-                    IsCollision = IsCollision(toX, toY);
+                    collision = IsCollision(toX, toY);
                 }
 
               /*moveDirection = RandomizeDirection();
@@ -89,7 +89,7 @@ namespace Solution
                 positionY = toY;
 
                 lastPart.transform.position = new Vector3(positionX, positionY, 0);
-                mapGennerator.mapData[positionX, positionY] = this ;
+                mapGenerator.mapdata[positionX, positionY] = this;
                 // 7. เพิ่มส่วนนั้นกลับเข้าไปเป็นส่วนที่สองของ LinkedList
                 // (ซึ่งก็คือส่วนแรกของลำตัว)
 

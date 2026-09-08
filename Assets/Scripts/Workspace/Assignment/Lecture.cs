@@ -31,10 +31,10 @@ namespace Assignment
 
             LinkedListNode<string> firstNode = linkedList.First;
             //string firstNode2 = Linkedlost.First; เก็บข้อมมูลเป็นโหนด
-            Debug.log("first: " + firstNode.Value);
-            linkedListNode<string> lastNode = linkedList.Last;
+            Debug.Log("first: " + firstNode.Value);
+            LinkedListNode<string> lastNode = linkedList.Last;
             Debug.Log("last: " + lastNode.Value);
-            LinkesListNode<string> node1 = linkedList.Find("Node 1");
+            LinkedListNode<string> node1 = linkedList.Find("Node 1");
             Debug.Log("node: " + node1.Value);
             Debug.Log(node1.Previous.Value);
             Debug.Log(node1.Next.Value);
@@ -44,16 +44,16 @@ namespace Assignment
 
 
             linkedList.AddAfter(node1, "Node 1.5");
-            linkedList.AddBefor(node1, "Node 0.5");
-            PrintLiinkList(linkedList);
+            linkedList.AddBefore(node1, "Node 0.5");
+            PrintLinkList(linkedList);
 
             linkedList.RemoveFirst();
-            PrintLiinkList(linkedList);
+            PrintLinkList(linkedList);
             linkedList.Remove("Node 2");//ถ้ามี node2 มากกว่า 1 มันจะลบตัวแรกที่เจอ
             //linkedlist.Remove(node1); ลบด้วยโหนด หรือ ค่าของตัวแปร
-            PrintLiinkList(linkedList);
-            linkedList.clear();
-            PrintLiinkList(linkedList);
+            PrintLinkList(linkedList);
+            linkedList.Clear();
+            PrintLinkList(linkedList);
            
            
         }
@@ -61,7 +61,7 @@ namespace Assignment
           void PrintLinkList(LinkedList<string> linkedList) 
         {
             Debug.Log("------linkedList------");
-            foreach (string s in linkedlist) 
+            foreach (string s in linkedList) 
             {
                 Debug.Log(s);   
             }
@@ -75,8 +75,8 @@ namespace Assignment
         public void LCT04_SyntaxDictionary()
         {
             Dictionary<int, string> dictionary = new Dictionary<int, string>();
-            dictionary2.Add(1, "Apple");
-            dictionary2.Add(2, "Banana");
+            dictionary.Add(1, "Apple");
+            dictionary.Add(2, "Banana");
             dictionary[3] = "Cherry";//มีค่าเท่ากับ Add
 
             // Debug.Log(dictionary[4]);

@@ -16,7 +16,7 @@ namespace Solution
         public override bool Hit()
         {
             // ตรวจสอบว่าผู้เล่นมีไอเท็มที่ต้องการหรือไม่
-            bool isHasItemAmont = mapGenerator.player.inventory.HasItem(ItemAmontToOpen, ItemAmontToOpen);
+            bool isHasItemAmont = mapGenerator.player.inventory.HasItem(ItemToOpen, ItemAmontToOpen);
             if (isHasItemAmont)
             {
                 YouWin.SetActive(true);
