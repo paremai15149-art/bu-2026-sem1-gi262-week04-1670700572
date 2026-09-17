@@ -7,12 +7,12 @@ namespace Assignment
     {
         public void Start()
         {
-             AS01_CountWords();
+           // AS01_CountWords();
             // AS02_CountNumber();
             // AS03_CheckValidBrackets();
             // AS04_PrintReverseLinkedList();
-            // AS05_FindMiddleElement();
-            // AS06_MergeDictionaries();
+             //AS05_FindMiddleElement();
+             AS06_MergeDictionaries();
             // AS07_RemoveDuplicatesFromLinkedList();
             // AS08_TopFrequentNumber();
             // AS09_PlayerInventory();
@@ -56,7 +56,32 @@ namespace Assignment
         public void AS02_CountNumber()
         {
             int[] numbers = as02Numbers;
-            throw new System.NotImplementedException();
+            Dictionary<int, int> numberCount = new Dictionary<int, int>();
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                int number = numbers[i];
+
+                if (numberCount.ContainsKey(number))
+                {
+                    numberCount[number]++;
+                }
+                else
+                {
+                    numberCount.Add(number, 1);
+                }
+            }
+
+            int[] keys = new int[numberCount.Keys.Count];
+            int[] values = new int[numberCount.Values.Count];
+
+            numberCount.Keys.CopyTo(keys, 0);
+            numberCount.Values.CopyTo(values, 0);
+
+            for (int i = 0; i < keys.Length; i++)
+            {
+                Debug.Log("number: " + keys[i] + " count: " + values[i]);
+            }
         }
 
         [Header("AS03 - Check Valid Brackets")]
@@ -65,7 +90,51 @@ namespace Assignment
         public void AS03_CheckValidBrackets()
         {
             string input = as03Input;
-            throw new System.NotImplementedException();
+            Dictionary<char, char> brackets = new Dictionary<char, char>()
+    {
+        { '(', ')' },
+        { '[', ']' },
+        { '{', '}' }
+    };
+
+            LinkedList<char> stack = new LinkedList<char>();
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                char current = input[i];
+
+                if (brackets.ContainsKey(current))
+                {
+                    stack.AddLast(current);
+                }
+                else if (brackets.ContainsValue(current))
+                {
+                    if (stack.Count == 0)
+                    {
+                        Debug.Log("Invalid");
+                        return;
+                    }
+
+                    char openBracket = stack.Last.Value;
+
+                    if (brackets[openBracket] != current)
+                    {
+                        Debug.Log("Invalid");
+                        return;
+                    }
+
+                    stack.RemoveLast();
+                }
+            }
+
+             if (stack.Count == 0)
+            {
+                Debug.Log("Valid");
+            }
+            else
+            {
+                Debug.Log("Invalid");
+            }
         }
 
         [Header("AS04 - Print Reverse Linked List")]
@@ -74,7 +143,20 @@ namespace Assignment
         public void AS04_PrintReverseLinkedList()
         {
             LinkedList<int> list = as04List.GetLinkedList();
-            throw new System.NotImplementedException();
+            if (list.Count == 0)
+            {
+                Debug.Log("List is empty");
+                return;
+            }
+                       
+            LinkedListNode<int> current = list.Last;
+                      
+            while (current != null)
+            {
+                Debug.Log(current.Value);
+
+                current = current.Previous;
+            }
         }
 
         [Header("AS05 - Find Middle Element")]
@@ -83,7 +165,22 @@ namespace Assignment
         public void AS05_FindMiddleElement()
         {
             LinkedList<string> list = as05List.GetLinkedList();
-            throw new System.NotImplementedException();
+            if (list.Count == 0)
+            {
+                Debug.Log("List is empty");
+                return;
+            }
+                      
+            LinkedListNode<string> slow = list.First;
+            LinkedListNode<string> fast = list.First;
+
+            while (fast != null && fast.Next != null)
+            {
+                slow = slow.Next;
+                fast = fast.Next.Next;
+            }
+                       
+            Debug.Log(slow.Value);
         }
 
         [Header("AS06 - Merge Dictionaries")]
@@ -94,7 +191,27 @@ namespace Assignment
         {
             Dictionary<string, int> dict1 = as06FirstDictionary.GetDictionary();
             Dictionary<string, int> dict2 = as06SecondDictionary.GetDictionary();
-            throw new System.NotImplementedException();
+            Dictionary<string, int> mergedDictionary = new Dictionary<string, int>(dict1);
+
+            foreach (KeyValuePair<string, int> pair in dict2)
+            {
+                string key = pair.Key;
+                int value = pair.Value;
+
+                if (mergedDictionary.ContainsKey(key))
+                {
+                    mergedDictionary[key] = mergedDictionary[key] + value;
+                }
+                else
+                {
+                    mergedDictionary.Add(key, value);
+                }
+            }
+
+            foreach (KeyValuePair<string, int> pair in mergedDictionary)
+            {
+                Debug.Log("key: " + pair.Key + ", value: " + pair.Value);
+            }
         }
 
         [Header("AS07 - Remove Duplicates From Linked List")]
