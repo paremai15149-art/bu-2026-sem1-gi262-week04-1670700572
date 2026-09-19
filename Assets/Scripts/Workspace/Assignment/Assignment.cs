@@ -7,13 +7,13 @@ namespace Assignment
     {
         public void Start()
         {
-           // AS01_CountWords();
+            //AS01_CountWords();
             // AS02_CountNumber();
             // AS03_CheckValidBrackets();
             // AS04_PrintReverseLinkedList();
-             //AS05_FindMiddleElement();
-             AS06_MergeDictionaries();
-            // AS07_RemoveDuplicatesFromLinkedList();
+            //AS05_FindMiddleElement();
+            // AS06_MergeDictionaries();
+            AS07_RemoveDuplicatesFromLinkedList();
             // AS08_TopFrequentNumber();
             // AS09_PlayerInventory();
             // AS10_GameEventQueue();
@@ -220,7 +220,39 @@ namespace Assignment
         public void AS07_RemoveDuplicatesFromLinkedList()
         {
             LinkedList<int> list = as07List.GetLinkedList();
-            throw new System.NotImplementedException();
+                        
+            if (list.Count == 0)
+            {
+                Debug.Log("Input array is empty");
+                return;
+            }
+            Dictionary<int, int> numberCount = new Dictionary<int, int>();
+                        
+            foreach (int value in list)
+            {
+                if (numberCount.ContainsKey(value))
+                {
+                    numberCount[value]++;
+                }
+                else
+                {
+                    numberCount.Add(value, 1);
+                }
+            }
+                        
+            int mostFrequentNumber = list.First.Value;
+            int maxCount = numberCount[mostFrequentNumber];
+
+            foreach (int value in list)
+            {
+                if (numberCount[value] > maxCount)
+                {
+                    mostFrequentNumber = value;
+                    maxCount = numberCount[value];
+                }
+            }
+
+            Debug.Log(mostFrequentNumber + " count: " + maxCount);
         }
 
         [Header("AS08 - Top Frequent Number")]
