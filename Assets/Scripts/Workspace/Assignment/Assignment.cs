@@ -13,11 +13,11 @@ namespace Assignment
             // AS04_PrintReverseLinkedList();
             //AS05_FindMiddleElement();
             // AS06_MergeDictionaries();
-            AS07_RemoveDuplicatesFromLinkedList();
+            //AS07_RemoveDuplicatesFromLinkedList();
             // AS08_TopFrequentNumber();
             // AS09_PlayerInventory();
-            // AS10_GameEventQueue();
-            // AS11_PlayerStatsTracker();
+            //AS10_GameEventQueue();
+             AS11_PlayerStatsTracker();
         }
 
         #region Assignment
@@ -261,7 +261,47 @@ namespace Assignment
         public void AS08_TopFrequentNumber()
         {
             int[] numbers = as08Numbers;
-            throw new System.NotImplementedException();
+
+            if (numbers == null || numbers.Length == 0)
+            {
+                Debug.Log("Input array is empty");
+                return;
+            }
+
+            Dictionary<int, int> numberCount = new Dictionary<int, int>();
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                int number = numbers[i];
+
+                if (numberCount.ContainsKey(number))
+                {
+                    numberCount[number]++;
+                }
+                else
+                {
+                    numberCount.Add(number, 1);
+                }
+            }
+
+            int topNumber = numbers[0];
+            int maxCount = numberCount[topNumber];
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                int number = numbers[i];
+                int count = numberCount[number];
+
+                if (count > maxCount)
+                {
+                    topNumber = number;
+                    maxCount = count;
+                }
+            }
+
+            Debug.Log(topNumber + " count: " + maxCount);
+        
+        
         }
 
         [Header("AS09 - Player Inventory")]
@@ -274,7 +314,20 @@ namespace Assignment
             Dictionary<string, int> inventory = as09Inventory.GetDictionary();
             string itemName = as09ItemName;
             int quantity = as09Quantity;
-            throw new System.NotImplementedException();
+
+            if (inventory.ContainsKey(itemName))
+            {
+                 inventory[itemName] = inventory[itemName] + quantity;
+            }
+            else
+            {
+                 inventory.Add(itemName, quantity);
+            }
+                        
+            foreach (KeyValuePair<string, int> item in inventory)
+            {
+                Debug.Log(item.Key + ": " + item.Value);
+            }
         }
 
         [Header("AS10 - Game Event Queue")]
@@ -283,7 +336,34 @@ namespace Assignment
         public void AS10_GameEventQueue()
         {
             LinkedList<GameEvent> eventQueue = as10EventQueue.GetLinkedList();
-            throw new System.NotImplementedException();
+            if (eventQueue.Count == 0)
+            {
+                Debug.Log("Event queue is empty");
+                return;
+            }
+                        
+            while (eventQueue.Count > 0)
+            {
+                GameEvent currentEvent = eventQueue.First.Value;
+                                
+                eventQueue.RemoveFirst();
+
+                Debug.Log("Processing event: " + currentEvent.Name);
+                Debug.Log("Remaining events in queue: " + eventQueue.Count);
+                                
+                if (currentEvent.EventType == "enemy")
+                {
+                    Debug.Log("Enemy event processed - " + currentEvent.Name);
+                }
+                else if (currentEvent.EventType == "powerup")
+                {
+                    Debug.Log("Power-up event processed - " + currentEvent.Name);
+                }
+                else if (currentEvent.EventType == "level")
+                {
+                    Debug.Log("Level event processed - " + currentEvent.Name);
+                }
+            }
         }
 
         [Header("AS11 - Player Stats Tracker")]
@@ -296,7 +376,23 @@ namespace Assignment
             Dictionary<string, int> playerStats = as11PlayerStats.GetDictionary();
             string statName = as11StatName;
             int value = as11Value;
-            throw new System.NotImplementedException();
+
+            if (playerStats.ContainsKey(statName))
+            {
+                 playerStats[statName] = playerStats[statName] + value;
+            }
+            else
+            {
+                playerStats.Add(statName, value);
+            }
+                        
+            Debug.Log("Updated " + statName + ": " + playerStats[statName]);
+            Debug.Log("Current player statistics:");
+
+            foreach (KeyValuePair<string, int> stat in playerStats)
+            {
+                Debug.Log(stat.Key + ": " + stat.Value);
+            }
         }
 
         #endregion

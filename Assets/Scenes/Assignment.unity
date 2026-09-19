@@ -409,17 +409,34 @@ MonoBehaviour:
       value: 4
   as07List:
     values: 05000000050000000500000005000000
-  as08Numbers: 
+  as08Numbers: 010000000100000002000000020000000200000003000000
   as09Inventory:
-    entries: []
-  as09ItemName: 
-  as09Quantity: 0
+    entries:
+    - key: sword
+      value: 1
+    - key: potion
+      value: 5
+  as09ItemName: potion
+  as09Quantity: 3
   as10EventQueue:
-    values: []
+    values:
+    - eventType: enemy
+      name: Goblin appeared
+      priority: 0
+    - eventType: powerup
+      name: Health boost found
+      priority: 0
+    - eventType: level
+      name: Reached level 2
+      priority: 0
   as11PlayerStats:
-    entries: []
-  as11StatName: 
-  as11Value: 0
+    entries:
+    - key: kills
+      value: 10
+    - key: deaths
+      value: 2
+  as11StatName: kills
+  as11Value: 3
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
